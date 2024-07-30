@@ -15,8 +15,8 @@ warnings.filterwarnings(action='ignore', category=DataConversionWarning)
 warnings.filterwarnings(action='ignore', category=UserWarning, module='sklearn')
 
 PATH_TO_DATA = 'data/'
-PATH_TO_RESULTS = 'results/selected_data_to_from/random_forest/'
-PATH_TO_MODELS = 'models/selected_data/'
+PATH_TO_RESULTS = 'results/'
+PATH_TO_MODELS = 'models/'
 
 with open(os.path.join(PATH_TO_DATA, 'train_test_data.pkl'), 'rb') as file:
     X_train, X_test, y_train, y_test = pickle.load(file)
@@ -62,7 +62,7 @@ cm = confusion_matrix(y_test, y_pred)
 disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=best_dt.classes_)
 disp.plot(cmap=plt.cm.Blues)
 disp.ax_.images[-1].colorbar.remove()
-plt.savefig(os.path.join(PATH_TO_RESULTS, 'confusion_matrix.png'), bbox_inches='tight')
+plt.savefig(os.path.join(PATH_TO_RESULTS, 'random_forest_confusion_matrix.png'), bbox_inches='tight')
 plt.close()
 
 report = classification_report(y_test, y_pred, output_dict=True)
@@ -78,7 +78,7 @@ table = ax.table(cellText=report_df.values,
 table.auto_set_font_size(False)
 table.set_fontsize(12)
 table.scale(1.2, 1.2)
-plt.savefig(os.path.join(PATH_TO_RESULTS, 'classification_report.png'), bbox_inches='tight')
+plt.savefig(os.path.join(PATH_TO_RESULTS, 'random_forest_classification_report.png'), bbox_inches='tight')
 plt.close()
 
 f = lambda x: best_dt.predict_proba(x)[:, 1]
@@ -89,8 +89,8 @@ shap_values_exp = shap.Explanation(values=shap_values, base_values=explainer.exp
 
 shap_fig = plt.figure(figsize=(25, 45), dpi=300)
 shap.plots.beeswarm(shap_values_exp, max_display=200, show=False, plot_size=1)
-shap_fig.savefig(os.path.join(PATH_TO_RESULTS, 'shap.png'), bbox_inches='tight')
+shap_fig.savefig(os.path.join(PATH_TO_RESULTS, 'random_forest_shap.png'), bbox_inches='tight')
 plt.close(shap_fig)
 
-with open(os.path.join(PATH_TO_MODELS, 'best_rf_selected_data_to_from.pkl'), 'wb') as f:
+with open(os.path.join(PATH_TO_MODELS, 'random_forest_.pkl'), 'wb') as f:
     pickle.dump(best_dt, f)
