@@ -77,7 +77,7 @@ plt.yticks(fontsize=55)
 ax = plt.gca()
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
-plt.savefig(os.path.join(PATH_TO_RESULTS, 'xgboost_importances.pdf'), bbox_inches='tight')
+plt.savefig(os.path.join(PATH_TO_RESULTS, 'xgboost_importances.png'), bbox_inches='tight')
 plt.close()
 
 cm = confusion_matrix(y_test, y_pred)
@@ -120,7 +120,7 @@ plt.xlabel('')
 plt.ylabel('')
 cbar = plt.gcf().axes[-1]
 cbar.tick_params(labelsize=20)
-shap_fig.savefig(os.path.join(PATH_TO_RESULTS, 'xgboost_shap.pdf'), bbox_inches='tight')
+shap_fig.savefig(os.path.join(PATH_TO_RESULTS, 'xgboost_shap.png'), bbox_inches='tight')
 plt.close(shap_fig)
 
 with open(os.path.join(PATH_TO_MODELS, 'xgboost.pkl'), 'wb') as f:
